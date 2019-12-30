@@ -1,5 +1,9 @@
 const WorkoutsService = {
-    getAllWorkouts(knex){
-        return knex.select('*').from('one_more')
+    getAllWorkouts(db){
+        return db
+        .select('*')
+        .from('one_more')
     },
 }
+
+module.exports = WorkoutsService;

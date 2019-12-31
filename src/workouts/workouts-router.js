@@ -76,6 +76,28 @@ workoutsRouter
         })
         .catch(next)
     })
+    .patch(bodyParser, (req,res,next) => {
+        const {title,workout1,lbs,set1,set2,set3} = req.body
+        const updateWorkout = {title,workout1,lbs,set1,set2,set3}
+
+        const numberOfvalues = Object.values(updateWorkout).filter(Boolean).length
+        if(numberOfvalues === 0){
+            return res.status(400).json({
+                error: {message: `request body must contain either 'title', 'url', 'description', or 'rating'`}
+            })
+        }
+
+        WorkoutsService.updateWorkout(
+            req.app.get('db'),
+            req.params.id,
+            updateWorkout
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+
+    })
     
 
 module.exports = workoutsRouter;

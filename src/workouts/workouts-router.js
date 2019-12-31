@@ -65,5 +65,17 @@ workoutsRouter
     .get((req,res,next) => {
         res.json(serializeWorkout(res.workout))
     })
+    .delete((req,res,next) => {
+        const { id } = req.params
+        WorkoutsService.deleteWorkout(
+            req.app.get('db'),
+            id
+        )
+        .then(numRowsAffected => {
+            res.status(204).end()
+        })
+        .catch(next)
+    })
+    
 
 module.exports = workoutsRouter;

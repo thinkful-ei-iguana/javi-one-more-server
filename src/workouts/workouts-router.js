@@ -26,4 +26,27 @@ workoutsRouter
           .catch(next)
     })
 
+workoutsRouter
+    .route('/:id')
+    .all((req,res,next) => {
+        const { id } = req.params
+        WorkoutsService.getById(
+            req.app.get('db'),
+            req.params.id
+        )
+        .then(workout => {
+            if (!workout) {
+              return res.status(404).json({
+                error: { message: `Bookmark ${id} Not Found` }
+              });
+            }
+            res.workout = workout
+            next()
+          })
+          .catch(next);
+    })
+    .get((req,res,next) => {
+        res.json(serializeWorkout(res.workout))
+    })
+
 module.exports = workoutsRouter;

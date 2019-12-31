@@ -83,7 +83,7 @@ workoutsRouter
         const numberOfvalues = Object.values(updateWorkout).filter(Boolean).length
         if(numberOfvalues === 0){
             return res.status(400).json({
-                error: {message: `request body must contain either 'title', 'url', 'description', or 'rating'`}
+                error: {message: `request body must contain either 'title', 'workout1', 'lbs', or 'sets1-3'`}
             })
         }
 

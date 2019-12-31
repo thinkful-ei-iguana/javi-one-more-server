@@ -25,6 +25,23 @@ workoutsRouter
           })
           .catch(next)
     })
+    .post(bodyParser, (req,res,next) => {
+        const {title,workout1,lbs,set1,set2,set3} = req.body
+        const newWorkout = {title,workout1,lbs,set1,set2,set3}
+
+    WorkoutsService.insertWorkout(
+        req.app.get('db'),
+        newWorkout
+    )
+    .then(workout => {
+        console.log(workout)
+        res
+        .status(201)
+        .location(`/workouts/${workout.id}`)
+        .json(serializeWorkout(workout))
+    })
+    .catch(next)
+    })
 
 workoutsRouter
     .route('/:id')

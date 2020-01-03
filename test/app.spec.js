@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const knex = require('knex');
 const supertest = require('supertest');
 const app = require('../src/app')
+const { makeWorkoutsArray } = require('../test/workouts.fixtures')
 
 describe('APP', () => {
     let workoutsCopy, db;
@@ -89,6 +90,31 @@ describe('APP', () => {
             })
     })
 
+    describe.only(`DELETE /workouts/:id`, () => {
+        context('Given there are workouts in the database', () => {
+            const testWorkouts = makeWorkoutsArray()
+        
+        
+        beforeEach('insert workout', () => {
+            return db
+                .into('workouts')
+                .insert(testWorkouts)
+        })
     
+        it('responds with 204 and removes the workout', () =>{
+            const idToRemove = 1
+            const expectedWorkouts = testWorkouts.filter(workout => workout.id !== idToRemove)
+            return supertest(app)
+                .delete(`/workouts/${idToRemove}`)
+                .expect(204)
+                .then(res => {
+                    supertest(app)
+                    .get(`/workouts`)
+                    .expect(expectedWorkouts)
+                })
+        })
+      })
+    })
 
 })
+

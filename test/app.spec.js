@@ -28,17 +28,32 @@ describe('APP', () => {
     })
 
     it('creates a workout, responding with 201 and the new workout', () => {
+        const newWorkout  = {
+            title: 'test new workout',
+            workout1: 'name of workout',
+            lbs: 50,
+            set1: 10,
+            set2: 10,
+            set3: 10
+        }
+
         return supertest(app)
           .post('/workouts')
-          .send({
-              title: 'test new workout',
-              workout1: 'name of workout',
-              lbs: 50,
-              set1: 10,
-              set2: 10,
-              set3: 10
-          })
+          .send(newWorkout)
           .expect(201)
+          .expect(res => {
+              expect(res.body.title).to.eql(newWorkout.title)
+              expect(res.body.workout1).to.eql(newWorkout.workout1)
+              expect(res.body.lbs).to.eql(newWorkout.lbs)
+              expect(res.body.set1).to.eql(newWorkout.set1)
+              expect(res.body.set2).to.eql(newWorkout.set2)
+              expect(res.body.set3).to.eql(newWorkout.set3)
+          })
+          .then(postRes => 
+            supertest(app)
+              .get(`/workouts/${postRes.body.id}`)
+              .expect(postRes.body)
+            )
     })
 
 })

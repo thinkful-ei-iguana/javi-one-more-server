@@ -48,12 +48,30 @@ describe('APP', () => {
               expect(res.body.set1).to.eql(newWorkout.set1)
               expect(res.body.set2).to.eql(newWorkout.set2)
               expect(res.body.set3).to.eql(newWorkout.set3)
+              expect(res.body).to.have.property('id')
+              expect(res.headers.location).to.eql(`/workouts/${res.body.id}`)
+
           })
           .then(postRes => 
             supertest(app)
               .get(`/workouts/${postRes.body.id}`)
               .expect(postRes.body)
             )
+    })
+
+    it(`responds with 400 and an error message when the title is missing`, () => {
+        return supertest(app)
+            .post('/workouts')
+            .send({
+                workout1: 'name of workout',
+                lbs: 50,
+                set1: 10,
+                set2: 10,
+                set3: 10
+            })
+            .expect(400, {
+                error: {message: `Missing 'title' in request body`}
+            })
     })
 
 })

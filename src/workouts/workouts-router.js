@@ -29,17 +29,15 @@ workoutsRouter
         const {title,workout1,lbs,set1,set2,set3} = req.body
         const newWorkout = {title,workout1,lbs,set1,set2,set3}
 
-        if(!title){
-            return res.status(400).json({
-                error: { message: `Missing 'title' in request body` }
-              })
-        }
 
-        if(!workout1){
-            return res.status(400).json({
-                error: { message: `Missing 'workout' in request body` }
-              })
-        }
+        for (const [key, value] of Object.entries(newWorkout)) {
+             if (value == null) {
+               return res.status(400).json({
+                 error: { message: `Missing '${key}' in request body` }
+               })
+             }
+           }
+        
 
     WorkoutsService.insertWorkout(
         req.app.get('db'),

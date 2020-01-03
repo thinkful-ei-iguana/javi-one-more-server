@@ -85,7 +85,7 @@ describe('APP', () => {
                 set3: 10
             })
             .expect(400, {
-                error: {message: `Missing 'workout' in request body`}
+                error: {message: `Missing 'workout1' in request body`}
             })
     })
 

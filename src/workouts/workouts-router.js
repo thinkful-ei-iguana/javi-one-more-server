@@ -35,6 +35,12 @@ workoutsRouter
               })
         }
 
+        if(!workout1){
+            return res.status(400).json({
+                error: { message: `Missing 'workout' in request body` }
+              })
+        }
+
     WorkoutsService.insertWorkout(
         req.app.get('db'),
         newWorkout

@@ -74,4 +74,21 @@ describe('APP', () => {
             })
     })
 
+    it(`responds with 400 and an error message when the workout is missing`, () => {
+        return supertest(app)
+            .post('/workouts')
+            .send({
+                title: 'test workout',
+                lbs: 50,
+                set1: 10,
+                set2: 10,
+                set3: 10
+            })
+            .expect(400, {
+                error: {message: `Missing 'workout' in request body`}
+            })
+    })
+
+    
+
 })

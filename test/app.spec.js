@@ -5,7 +5,7 @@ const app = require('../src/app')
 const { makeWorkoutsArray } = require('../test/workouts.fixtures')
 
 describe('APP', () => {
-    let workoutsCopy, db;
+    let  db;
     before('make knex instance', () => {
         db = knex({
           client: 'pg',
@@ -19,6 +19,7 @@ describe('APP', () => {
     before('cleanup', () => db('workouts').truncate());
 
     afterEach('cleanup', () => db('workouts').truncate());
+
 
 
     it('GET / responds with 200', () => {
@@ -90,17 +91,16 @@ describe('APP', () => {
             })
     })
 
-    describe.only(`DELETE /workouts/:id`, () => {
+    describe(`DELETE /workouts/:id`, () => {
         context('Given there are workouts in the database', () => {
             const testWorkouts = makeWorkoutsArray()
-        
-        
+
         beforeEach('insert workout', () => {
             return db
                 .into('workouts')
                 .insert(testWorkouts)
         })
-    
+
         it('responds with 204 and removes the workout', () =>{
             const idToRemove = 1
             const expectedWorkouts = testWorkouts.filter(workout => workout.id !== idToRemove)

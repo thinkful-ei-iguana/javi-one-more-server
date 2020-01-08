@@ -19,7 +19,6 @@ const serializeWorkout = workout => ({
 workoutsRouter
     .route('/')
     .get((req,res,next) => {
-        // res.send('get all workouts')
         WorkoutsService.getAllWorkouts(req.app.get('db'))
           .then(response => {
               res.json(response.map(serializeWorkout))

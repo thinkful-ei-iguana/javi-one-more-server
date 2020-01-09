@@ -64,7 +64,7 @@ workoutsRouter
         .then(workout => {
             if (!workout) {
               return res.status(404).json({
-                error: { message: `Bookmark ${id} Not Found` }
+                error: { message: `workout ${id} Not Found` }
               });
             }
             res.workout = workout

@@ -1,5 +1,13 @@
 # One More Server
 
+## Endpoints
+
+/src/app.js => line 21 app.use('/workouts', WorkoutsRouter)
+/scr/workouts/workouts-router.js line20 => .route('/') gets all workouts that have been made
+/scr/workouts/workouts-router.js line57 => .route('/:id') gets a single workout created and renders that workout
+
+
+
 ## Scripts
 
 Start the application npm start

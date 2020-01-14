@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 
 const WorkoutsRouter = require('./workouts/workouts-router')
 const UsersRouter = require('./users/users-router')
+const AuthRouter = require('./auth/auth-router')
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(cors())
 
 app.use('/workouts', WorkoutsRouter)
 app.use('/users', UsersRouter)
+app.use('/auth', AuthRouter)
 
 
 app.use(function errorHandler(error, req, res, next) {

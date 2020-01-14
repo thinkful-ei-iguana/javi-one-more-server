@@ -23,7 +23,7 @@ app.use(cors())
 
 app.use('/workouts', WorkoutsRouter)
 app.use('/users', UsersRouter)
-app.use('/auth', AuthRouter)
+app.use('/', AuthRouter)
 
 
 app.use(function errorHandler(error, req, res, next) {

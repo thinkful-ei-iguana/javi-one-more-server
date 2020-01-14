@@ -5,10 +5,10 @@ TRUNCATE
 
 INSERT INTO one_more_users (user_name, full_name, password)
 VALUES
-  ('dunder', 'Dunder Mifflin', '123'),
-  ('b.deboop', 'Bodeep Deboop','123'),
-  ('c.bloggs', 'Charlie Bloggs','123'),
-  ('s.smith', 'Sam Smith', '123');
+  ('dunder', 'Dunder Mifflin', '$2a$12$u0piEGpxTzUYRhYsv4LWUeWY3Cyj6UO5aUj1c5bN8Kh6tPIK/LwNK'),
+  ('b.deboop', 'Bodeep Deboop','$2a$12$u0piEGpxTzUYRhYsv4LWUeWY3Cyj6UO5aUj1c5bN8Kh6tPIK/LwNK'),
+  ('c.bloggs', 'Charlie Bloggs','$2a$12$u0piEGpxTzUYRhYsv4LWUeWY3Cyj6UO5aUj1c5bN8Kh6tPIK/LwNK'),
+  ('s.smith', 'Sam Smith', '$2a$12$u0piEGpxTzUYRhYsv4LWUeWY3Cyj6UO5aUj1c5bN8Kh6tPIK/LwNK');
 
 INSERT INTO workouts (title, workout1,lbs,set1,set2,set3, user_id) 
 VALUES 

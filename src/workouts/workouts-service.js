@@ -20,6 +20,11 @@ const WorkoutsService = {
         .where('id',id)
         .first()
     },
+    getByUserId(db,id){
+        return WorkoutsService.getAllWorkouts(db)
+        .where('user_id', id)
+        .first()
+    }
     deleteWorkout(db,id){
         return db('workouts')
         .where({id})

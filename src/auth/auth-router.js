@@ -43,6 +43,16 @@ authRouter
   })
 
   authRouter
+  .route('/')
+  .get((req,res,next) => {
+      WorkoutsService.getByUserId(req.app.get('db'))
+        .then(response => {
+            res.json(response.map(serializeWorkout))
+        })
+        .catch(next)
+  })
+
+  authRouter
   .post('/refresh', requireAuth, (req,res) => {
       const sub = req.user.user_name
       const payload = { user_id: req.user.id}

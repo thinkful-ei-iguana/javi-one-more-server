@@ -18,10 +18,10 @@ const serializeWorkout = workout => ({
     user_id: workout.user_id
 })
 
-const serializeOneMoreUser = user => ({
-    userId: user.id,
-    user_name: user.user_name
-})
+// const serializeOneMoreUser = user => ({
+//     userId: user.id,
+//     user_name: user.user_name
+// })
 
 WorkoutsRouter
     .route('/')
@@ -66,7 +66,7 @@ WorkoutsRouter
             WorkoutsService.getWorkoutsByUserId(req.app.get('db'), req.params.user_id)
             .then(workouts => {
                 console.log("workouts",workouts)
-                res.json(response.map(serializeWorkout))
+                res.json(workouts.map(serializeWorkout))
             })
             .catch(next)
         })

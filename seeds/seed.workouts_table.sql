@@ -47,5 +47,41 @@ VALUES
     12,
     12,
     4
+),
+(
+    'test1',
+    'seated cable rows',
+    160,
+    8,
+    8,
+    8,
+    1
+),
+(
+    'test2',
+    'dumbell curls',
+    35,
+    12,
+    12,
+    12,
+    1
+),
+(
+    'test3',
+    'good mornings',
+    40,
+    8,
+    8,
+    8,
+    2
+),
+(
+    'test4',
+    'lunges',
+    60,
+    12,
+    12,
+    12,
+    3
 );
 

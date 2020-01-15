@@ -34,24 +34,16 @@ authRouter
                       
                       const subject = dbUser.user_name
                       const payload = { user_id: dbUser.id }
+                      const payload2 = { }
                       res.send({
-                          authToken: AuthService.createJwt(subject,payload)
+                          authToken: AuthService.createJwt(subject,payload),
+                          userWorkout: AuthService.getAllWorkouts()
                       })
                 })
           })
           .catch(next)
   })
 
-  authRouter
-  .route('/workouts')
-  .get((req,res,next) => {
-      AuthService.getByUserId(req.app.get('db'))
-        .then(response => {
-            console.log(response)
-            res.json(response.map(serializeWorkout))
-        })
-        .catch(next)
-  })
 
   authRouter
   .post('/refresh', requireAuth, (req,res) => {

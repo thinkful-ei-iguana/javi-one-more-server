@@ -8,9 +8,14 @@ const AuthService = {
         .where({ user_name })
         .first()
     },
-    getByUserId(db,id){
-        return AuthService.getUserWithUserName(db)
-        .where('user_id', id)
+    getAllWorkouts(db){
+        return db
+        .select('user_id')
+        .from('workouts')
+    },
+    getByUserId(db,user_id){
+        return db('workouts')
+        .where('user_id', user_id)
         .first()
     },
     comparePasswords(password, hash){

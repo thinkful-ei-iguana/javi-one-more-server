@@ -11,10 +11,6 @@ const AuthRouter = require('./auth/auth-router')
 
 const app = express()
 
-const morganOption = (NODE_ENV === 'production')
-  ? 'tiny'
-  : 'common';
-
   app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
     skip: () => NODE_ENV === 'test',
   }))
@@ -25,7 +21,7 @@ app.use(cors())
 
 app.use('/workouts', WorkoutsRouter)
 app.use('/users', UsersRouter)
-app.use('/auth', AuthRouter)
+app.use('/workouts/auth', AuthRouter)
 
 
 app.use(function errorHandler(error, req, res, next) {

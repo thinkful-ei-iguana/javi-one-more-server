@@ -39,7 +39,7 @@ authRouter
                       const payload2 = {user_id: dbUser.id }
                       res.send({
                           authToken: AuthService.createJwt(subject,payload),
-                        //   userWorkout: AuthService.getAllWorkouts(subject2,payload2)
+                        userWorkout: AuthService.getAllWorkouts(req.app.get('db'),payload2)
                       })
                 })
           })

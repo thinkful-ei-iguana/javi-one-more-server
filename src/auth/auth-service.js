@@ -8,12 +8,6 @@ const AuthService = {
         .where({ user_name })
         .first()
     },
-    getAllWorkouts(db, user_id){
-        return db('one_more_users')
-        .select('*')
-        .from('workouts')
-        .where('user_id', user_id)
-    },
     comparePasswords(password, hash){
         return bcrypt.compare(password, hash)
     },

@@ -34,12 +34,10 @@ authRouter
                       })
                       
                       const subject = dbUser.user_name
-                      const subject2 = dbUser.id
                       const payload = { user_id: dbUser.id }
-                      const payload2 = {user_id: dbUser.id }
                       res.send({
                           authToken: AuthService.createJwt(subject,payload),
-                        userWorkout: AuthService.getAllWorkouts(req.app.get('db'),payload2)
+                          id: dbUser.id
                       })
                 })
           })

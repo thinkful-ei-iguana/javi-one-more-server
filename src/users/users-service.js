@@ -10,6 +10,13 @@ const UsersSevice = {
           .first()
           .then(user => !!user)
     },
+    getById(db,id){
+      return db
+      .from('one_more_users')
+      .select('*')
+      .where({ id })
+      .first()
+    },
     insertUser(db, newUser) {
         return db
           .insert(newUser)

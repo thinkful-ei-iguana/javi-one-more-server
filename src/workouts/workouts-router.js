@@ -1,9 +1,10 @@
 const express = require('express')
 const xss = require('xss')
 const WorkoutsService = require('./workouts-service')
+const requireAuth = require('../middleware/jwt-auth')
 
 
-const workoutsRouter = express.Router();
+const WorkoutsRouter = express.Router();
 const bodyParser = express.json();
 
 const serializeWorkout = workout => ({
@@ -14,9 +15,15 @@ const serializeWorkout = workout => ({
     set1: Number(workout.set1),
     set2: Number(workout.set2),
     set3: Number(workout.set3),
+    user_id: workout.user_id
 })
 
-workoutsRouter
+const serializeOneMoreUser = user => ({
+    userId: user.id,
+    user_name: user.user_name
+})
+
+WorkoutsRouter
     .route('/')
     .get((req,res,next) => {
         WorkoutsService.getAllWorkouts(req.app.get('db'))
@@ -44,7 +51,6 @@ workoutsRouter
         newWorkout
     )
     .then(workout => {
-        console.log(workout)
         res
         .status(201)
         .location(`/workouts/${workout.id}`)
@@ -53,7 +59,19 @@ workoutsRouter
     .catch(next)
     })
 
-workoutsRouter
+    WorkoutsRouter
+        .route('/:user_id/myWorkouts')
+        // .all(requireAuth)
+        .get((req,res,next) => {
+            WorkoutsService.getWorkoutsByUserId(req.app.get('db'), req.params.user_id)
+            .then(workouts => {
+                console.log("workouts",workouts)
+                res.json(response.map(serializeWorkout))
+            })
+            .catch(next)
+        })
+
+    WorkoutsRouter
     .route('/:id')
     .all((req,res,next) => {
         const { id } = req.params
@@ -110,4 +128,4 @@ workoutsRouter
     })
     
 
-module.exports = workoutsRouter;
+module.exports = WorkoutsRouter;

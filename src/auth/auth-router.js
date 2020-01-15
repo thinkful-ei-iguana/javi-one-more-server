@@ -43,7 +43,7 @@ authRouter
   })
 
   authRouter
-  .route('/workoutPage')
+  .route('/workouts')
   .get((req,res,next) => {
       AuthService.getByUserId(req.app.get('db'))
         .then(response => {

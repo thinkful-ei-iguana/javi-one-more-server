@@ -8,6 +8,11 @@ const AuthService = {
         .where({ user_name })
         .first()
     },
+    getByUserId(db,id){
+        return AuthService.getUserWithUserName(db)
+        .where('user_id', id)
+        .first()
+    },
     comparePasswords(password, hash){
         return bcrypt.compare(password, hash)
     },

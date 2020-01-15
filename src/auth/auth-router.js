@@ -43,10 +43,11 @@ authRouter
   })
 
   authRouter
-  .route('/')
+  .route('/workoutPage')
   .get((req,res,next) => {
-      WorkoutsService.getByUserId(req.app.get('db'))
+      AuthService.getByUserId(req.app.get('db'))
         .then(response => {
+            console.log(response)
             res.json(response.map(serializeWorkout))
         })
         .catch(next)

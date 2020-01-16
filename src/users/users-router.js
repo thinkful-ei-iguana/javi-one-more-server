@@ -5,7 +5,15 @@ const usersRouter = express.Router()
 const jsonBodyParser = express.json()
 
 usersRouter
-    .post('/', jsonBodyParser, (req,res,next) => {
+    .route('/')
+    .get((req,res,next) => {
+        UsersService.getAllUsers(req.app.get('db'))
+          .then(users => {
+              res.json(users.map(UsersService.serializeUser))
+          })
+          .catch(next)
+    })
+    .post(jsonBodyParser, (req,res,next) => {
         const { user_name, full_name, password } = req.body
         console.log(user_name,full_name,password)
      

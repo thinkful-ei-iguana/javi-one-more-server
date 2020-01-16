@@ -10,6 +10,10 @@ const UsersSevice = {
           .first()
           .then(user => !!user)
     },
+    getAllUsers(db){
+      return db.from('one_more_users')
+        .select('*')
+    },
     getById(db,id){
       return db
       .from('one_more_users')
